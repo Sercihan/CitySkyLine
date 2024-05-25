@@ -1,0 +1,26 @@
+﻿@model List<ResultServiceDTO>
+<!-- Services Start -->
+<div class="container-fluid bg-light py-6 px-5">
+    <div class="text-center mx-auto mb-5" style="max-width: 600px;">
+        <h1 class="display-5 text-uppercase mb-4">EN İYİ İNŞAAT <div class="text-primary">HİZMETLERİNİ</div> SUNUYORUZ</h1>
+    </div>
+    <div class="row g-5">
+        @foreach (var item in Model)
+        {
+            <div class="col-lg-4 col-md-6">
+                <div class="service-item bg-white d-flex flex-column align-items-center text-center">
+                    <img class="img-fluid" src="~/img/@item.Image" alt="">
+                    <div class="service-icon bg-white">
+                        <i class="@item.Icon text-primary"></i>
+                    </div>
+                    <div class="px-4 pb-4">
+                        <h4 class="text-uppercase mb-3">@item.Title</h4>
+                        <p>@item.Description</p>
+                        <a class="btn text-primary" href="">DAHA FAZLA BİLGİ <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<!-- Services End -->
