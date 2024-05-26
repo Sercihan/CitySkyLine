@@ -17,10 +17,7 @@ namespace CitySkyLine.Entity
         public Country Country { get; set; }
 
         public List<District> Districts { get; set; }
-        //public List<Project> Projects { get; set; }
-        //public List<Project> Projects { get; set; }
-        //private readonly List<ProjectCity> _projectCities = new List<ProjectCity>();
-        //public IReadOnlyCollection<ProjectCity> ProjectCities => _projectCities.AsReadOnly();
+
 
     }
 }

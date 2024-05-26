@@ -19,7 +19,7 @@ namespace CitySkyLine.BLL.DTOs.CommentDTO
         public string Description { get; set; }
         public DateTime DateTime { get; set; }
 
-        public int BlogDetailId { get; set; }
-        public BlogDetail BlogDetail { get; set; }
+        public int BlogId { get; set; }
+        public Blog Blog { get; set; }
     }
 }

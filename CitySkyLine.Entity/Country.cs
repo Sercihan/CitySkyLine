@@ -14,8 +14,6 @@ namespace CitySkyLine.Entity
         public string Name { get; set; }
 
         public List<City> Cities { get; set; }
-        //public List<ProjectLocation> ProjectLocations { get; set; }
-        //public List<Project> Projects { get; set; }
 
     }
 }

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CitySkyLine.DAL.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240525203739_CreateDataBase")]
+    [Migration("20240526105529_CreateDataBase")]
     partial class CreateDataBase
     {
         /// <inheritdoc />
@@ -105,6 +105,11 @@ namespace CitySkyLine.DAL.Migrations
                         .HasMaxLength(600)
                         .HasColumnType("nvarchar(600)");
 
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
                     b.Property<string>("UserName")
                         .IsRequired()
                         .HasMaxLength(200)
@@ -126,10 +131,8 @@ namespace CitySkyLine.DAL.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("BlogId")
+                        .HasMaxLength(200)
                         .HasColumnType("int");
-
-                    b.Property<DateTime>("DateTime")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description1")
                         .IsRequired()
@@ -143,16 +146,6 @@ namespace CitySkyLine.DAL.Migrations
                     b.Property<string>("Description3")
                         .HasMaxLength(600)
                         .HasColumnType("nvarchar(600)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
-
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
 
                     b.HasKey("Id");
 
@@ -238,7 +231,7 @@ namespace CitySkyLine.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("BlogDetailId")
+                    b.Property<int>("BlogId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DateTime")
@@ -261,7 +254,7 @@ namespace CitySkyLine.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BlogDetailId");
+                    b.HasIndex("BlogId");
 
                     b.ToTable("Comments");
                 });
@@ -348,22 +341,12 @@ namespace CitySkyLine.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("BlogDetailId")
+                    b.Property<int>("BlogId")
                         .HasColumnType("int");
-
-                    b.Property<string>("Image")
-                        .IsRequired()
-                        .HasMaxLength(600)
-                        .HasColumnType("nvarchar(600)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BlogDetailId");
+                    b.HasIndex("BlogId");
 
                     b.ToTable("RecentPosts");
                 });
@@ -533,13 +516,13 @@ namespace CitySkyLine.DAL.Migrations
 
             modelBuilder.Entity("CitySkyLine.Entity.Comment", b =>
                 {
-                    b.HasOne("CitySkyLine.Entity.BlogDetail", "BlogDetail")
+                    b.HasOne("CitySkyLine.Entity.Blog", "Blog")
                         .WithMany("Comments")
-                        .HasForeignKey("BlogDetailId")
+                        .HasForeignKey("BlogId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("BlogDetail");
+                    b.Navigation("Blog");
                 });
 
             modelBuilder.Entity("CitySkyLine.Entity.District", b =>
@@ -566,13 +549,13 @@ namespace CitySkyLine.DAL.Migrations
 
             modelBuilder.Entity("CitySkyLine.Entity.RecentPost", b =>
                 {
-                    b.HasOne("CitySkyLine.Entity.BlogDetail", "BlogDetail")
+                    b.HasOne("CitySkyLine.Entity.Blog", "Blog")
                         .WithMany("RecentPosts")
-                        .HasForeignKey("BlogDetailId")
+                        .HasForeignKey("BlogId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("BlogDetail");
+                    b.Navigation("Blog");
                 });
 
             modelBuilder.Entity("CitySkyLine.Entity.About", b =>
@@ -583,10 +566,7 @@ namespace CitySkyLine.DAL.Migrations
             modelBuilder.Entity("CitySkyLine.Entity.Blog", b =>
                 {
                     b.Navigation("BlogDetails");
-                });
 
-            modelBuilder.Entity("CitySkyLine.Entity.BlogDetail", b =>
-                {
                     b.Navigation("Comments");
 
                     b.Navigation("RecentPosts");

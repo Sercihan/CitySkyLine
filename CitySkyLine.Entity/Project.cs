@@ -19,11 +19,5 @@ namespace CitySkyLine.Entity
 
         public int DistrictId { get; set; }
         public District District { get; set; }
-
-        //private readonly List<ProjectCity> _projectCities = new List<ProjectCity>();
-        //public IReadOnlyCollection<ProjectCity> ProjectCities => _projectCities.AsReadOnly();
-
-
-
     }
 }
