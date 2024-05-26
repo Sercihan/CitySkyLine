@@ -1,4 +1,6 @@
 using CitySkyLine.BLL.Abstract;
+using CitySkyLine.Entity;
+using CitySkyLine.WEBUI.EmailServices;
 using CitySkyLine.WEBUI.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -7,6 +9,12 @@ namespace CitySkyLine.WEBUI.Controllers
 {
     public class HomeController : Controller
     {
+        private IMailService _mailService;
+
+        public HomeController(IMailService mailService)
+        {
+            _mailService = mailService;
+        }
         public IActionResult Index()
         {
             return View();
@@ -42,6 +50,23 @@ namespace CitySkyLine.WEBUI.Controllers
         public IActionResult Testimonial()
         {
             return View();
+        }
+        public IActionResult SendEmail(Mail mail)
+        {
+            string body = $"<h1>Ýletiþim Bilgileri</h1><br>Ad Soyad:{mail.Name}<br>Email:{mail.Email}<br>Konu:{mail.Subject}<br>Mesaj:{mail.Message}";
+            bool result = MailHelper.SendMail(body, "altanemre1989@gmail.com", mail.Subject);
+            if (result)
+            {
+                mail.Read = false;
+                _mailService.Create(mail);
+                TempData["MailSuccess"] = "true";
+            }
+            else
+            {
+                TempData["MailSuccess"] = "false";
+            }
+
+            return RedirectToAction("Contact");
         }
     }
 }

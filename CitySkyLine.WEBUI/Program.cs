@@ -16,8 +16,7 @@ namespace CitySkyLine.WEBUI
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddAutoMapper(typeof(MapProfile));
-            // builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DatabaseConnect")));
-            //Dependency Injection
+            
 
             builder.Services.AddScoped<IAbilityService, AbilityManager>();
             builder.Services.AddScoped<IAbilityDal, EFCoreAbilityDal>();
@@ -64,13 +63,16 @@ namespace CitySkyLine.WEBUI
             builder.Services.AddScoped<ITestimonialService, TestimonialManager>();
             builder.Services.AddScoped<ITestimonialDal, EFCoreTestimonialDal>();
 
+            builder.Services.AddScoped<IMailService, MailManager>();
+            builder.Services.AddScoped<IMailDal, EFCoreMailDal>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+
                 app.UseHsts();
             }
 
@@ -83,7 +85,7 @@ namespace CitySkyLine.WEBUI
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Admin}/{action=Index}/{id?}");
 
             app.Run();
         }

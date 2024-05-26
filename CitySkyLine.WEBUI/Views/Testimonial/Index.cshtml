@@ -39,7 +39,7 @@
                                 <td><img class="img-fluid" src="~/img/@agn.Image" alt="Image" style="width:50%"></td>
                                 <td>@agn.Name</td>
                                 <td>@agn.Title</td>
-                                <td>@agn.Description</td>
+                                <td style="text-wrap: wrap;">@agn.Description</td>
                                 <td><a href="/Testimonial/Edit?id=@agn.Id" class="btn btn-outline-warning">Güncelle</a></td>
                                 <td><a asp-controller="Testimonial" asp-action="Delete" asp-route-id="@agn.Id" class="btn btn-outline-danger">Sil</a></td>
                             </tr>

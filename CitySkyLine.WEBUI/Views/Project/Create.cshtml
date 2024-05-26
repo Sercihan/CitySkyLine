@@ -1,0 +1,149 @@
+﻿@model CreateProjectDTO
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<form asp-controller="Project" asp-action="Create" method="post" enctype="multipart/form-data">
+    <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Yeni Project</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <img id="previewImage" src="" class="card-img-top" alt="..." style="width:100%">
+                            </div>
+                            <div class="form-group">
+                                <input type="file" id="imageInput" name="file" value="@Model.Image" accept="image/*" onchange="updateCard()" />
+                                <span asp-validation-for="Image" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <label asp-for="Title"></label>
+                                <input asp-for="Title" class="form-control" />
+                                <span asp-validation-for="Title" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Type"></label>
+                                <input asp-for="Type" class="form-control" />
+                                <span asp-validation-for="Type" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                            <label asp-for="CountryId"></label>
+                                <select class="form-control" style="width: 100%;" asp-for="CountryId">
+                            <option value="">-- Ülke Seçiniz --</option>
+                            @* @foreach (var item in ViewBag.Countries)
+                            {
+                            <option value="@item.Id">@item.Name</option>
+                            } *@
+                            </select>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="CityId"></label>
+                                <select class="form-control" style="width: 100%;" asp-for="CityId">
+                                    <option value="">-- İl Seçiniz --</option>
+                                    @* @foreach (var item in ViewBag.Cities)
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    } *@
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="DistrictId"></label>
+                                <select class="form-control" style="width: 100%;" asp-for="DistrictId">
+                                    <option value="">-- İlçe Seçiniz --</option>
+                                    @* @foreach (var item in ViewBag.Districts)
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    } *@
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+
+                <div class="card-footer text-center">
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Kaydet</button>
+                </div>
+
+            </div>
+            <!-- /.card -->
+        </div>
+
+    </div>
+</form>
+<script>
+    $(document).ready(function () {
+        // Ülke verilerini doldur
+        $.ajax({
+            url: '/getCountries',
+            method: 'GET',
+            success: function (data) {
+                data.forEach(function (country) {
+                    $('#CountryId').append(new Option(country.name, country.id));
+                });
+            }
+        });
+
+        // İl verilerini doldur
+        $('#CountryId').change(function () {
+            var countryId = $(this).val();
+            $('#CityId').empty().append(new Option("İl Seçin", ""));
+            if (countryId) {
+                $.ajax({
+                    url: '/getCities',
+                    method: 'GET',
+                    data: { countryId: countryId },
+                    success: function (data) {
+                        data.forEach(function (city) {
+                            $('#CityId').append(new Option(city.name, city.id));
+                        });
+                    }
+                });
+            }
+        });
+
+        // İlçe verilerini doldur
+        $('#CityId').change(function () {
+            var cityId = $(this).val();
+            $('#DistrictId').empty().append(new Option("İlçe Seçin", ""));
+            if (cityId) {
+                $.ajax({
+                    url: '/getDistricts',
+                    method: 'GET',
+                    data: { cityId: cityId },
+                    success: function (data) {
+                        data.forEach(function (district) {
+                            $('#DistrictId').append(new Option(district.name, district.id));
+                        });
+                    }
+                });
+            }
+        });
+    });
+
+    function updateCard() {
+        var input = document.getElementById('imageInput');
+        var preview = document.getElementById('previewImage');
+        var file = input.files[0];
+        var reader = new FileReader();
+        reader.onloadend = function () {
+            preview.src = reader.result;
+        }
+        if (file) {
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = "";
+        }
+    }
+</script>
+

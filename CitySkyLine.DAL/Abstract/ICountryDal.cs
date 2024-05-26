@@ -9,6 +9,6 @@ namespace CitySkyLine.DAL.Abstract
 {
     public interface ICountryDal : IRepository<Country>
     {
-        
+        public List<City> GetCityById(int id);
     }
 }

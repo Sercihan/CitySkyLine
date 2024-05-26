@@ -1,0 +1,54 @@
+﻿@model List<ResultBlogDTO>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Blog Listesi</h3>
+                <div class="card-tools">
+                    <div class="input-group input-group-sm">
+                        <a href="/Blog/Create" class="btn btn-outline-primary btn-sm">
+                            <i class="fas fa-plus"></i> Yeni Blog
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Image</th>
+                            <th>Title</th>
+                            <th>User Name</th>
+                            <th>Date Time</th>
+                            <th>Güncelle</th>
+                            <th>Sil</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var blog in Model)
+                        {
+                            <tr>
+                                <td>@blog.Id</td>
+                                <td><img class="img-fluid" src="~/img/@blog.Image" alt="Image" style="width:50%"></td>
+                                <td>@blog.Title</td>
+                                <td>@blog.UserName</td>
+                                <td>@blog.DateTime.ToString("dd/MM/yyyy")</td>
+                                <td><a href="/Blog/Edit?id=@blog.Id" class="btn btn-outline-warning">Güncelle</a></td>
+                                <td><a asp-controller="Blog" asp-action="Delete" asp-route-id="@blog.Id" class="btn btn-outline-danger">Sil</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+</div>

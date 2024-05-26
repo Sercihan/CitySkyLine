@@ -48,5 +48,10 @@ namespace CitySkyLine.BLL.Concrete
         {
             _districtDal.Update(entity);
         }
+
+        public List<District> GetDistrictsById(int id)
+        {
+            return _districtDal.GetDistrictsById(id);
+        }
     }
 }

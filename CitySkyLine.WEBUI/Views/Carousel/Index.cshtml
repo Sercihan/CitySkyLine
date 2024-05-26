@@ -1,0 +1,53 @@
+﻿@model List<ResultCarouselDTO>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Carousel Listesi</h3>
+                <div class="card-tools">
+                    <div class="input-group input-group-sm">
+                        <a href="/Carousel/Create" class="btn btn-outline-primary btn-sm">
+                            <i class="fas fa-plus"></i> Yeni Carousel
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Image</th>
+                            <th>Title</th>
+                            <th>Icon</th>
+                            <th>Güncelle</th>
+                            <th>Sil</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var carousel in Model)
+                        {
+                            <tr>
+                                <td>@carousel.Id</td>
+                                <td><img class="img-fluid" src="~/img/@carousel.Image" alt="Image" style="width:50%"></td>
+                                <td>@carousel.Title</td>
+                                <td>@carousel.Icon</td>
+                                <td><a href="/Carousel/Edit?id=@carousel.Id" class="btn btn-outline-warning">Güncelle</a></td>
+                                <td><a asp-controller="Carousel" asp-action="Delete" asp-route-id="@carousel.Id" class="btn btn-outline-danger">Sil</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+</div>
+

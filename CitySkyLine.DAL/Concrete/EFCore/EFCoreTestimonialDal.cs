@@ -16,7 +16,7 @@ namespace CitySkyLine.DAL.Concrete.EFCore
         {
             using (var context = new DataContext())
             {
-                return context.Testimonials.FirstOrDefault();
+                return context.Testimonials.FirstOrDefault(filter);
             }
         }
     }

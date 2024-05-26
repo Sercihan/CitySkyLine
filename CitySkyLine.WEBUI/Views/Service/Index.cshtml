@@ -1,0 +1,54 @@
+﻿@model List<ResultServiceDTO>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Service Listesi</h3>
+                <div class="card-tools">
+                    <div class="input-group input-group-sm">
+                        <a href="/Service/Create" class="btn btn-outline-primary btn-sm">
+                            <i class="fas fa-plus"></i> Yeni Service
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Image</th>
+                            <th>Title</th>
+                            <th>Icon</th>
+                            <th>Description</th>
+                            <th>Güncelle</th>
+                            <th>Sil</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var service in Model)
+                        {
+                            <tr>
+                                <td>@service.Id</td>
+                                <td><img class="img-fluid" src="~/img/@service.Image" alt="Image" style="width:50%"></td>
+                                <td>@service.Title</td>
+                                <td>@service.Icon</td>
+                                <td style="text-wrap: wrap;">@service.Description</td>
+                                <td><a href="/Service/Edit?id=@service.Id" class="btn btn-outline-warning">Güncelle</a></td>
+                                <td><a asp-controller="Team" asp-action="Delete" asp-route-id="@service.Id" class="btn btn-outline-danger">Sil</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+</div>

@@ -46,5 +46,6 @@ namespace CitySkyLine.DAL.Concrete.EFCore
         public DbSet<Service> Services { get; set; }
         public DbSet<Team> Teams { get; set; }
         public DbSet<Testimonial> Testimonials { get; set; }
+        public DbSet<Mail> Mails { get; set; }
     }
 }

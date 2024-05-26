@@ -1,0 +1,94 @@
+﻿@model UpdateTeamDTO
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <!-- left column -->
+    <div class="col-md-12">
+        <!-- general form elements -->
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Team Bilgileri</h3>
+            </div>
+            <form asp-controller="Team" asp-action="Edit" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="Id" value="@Model.Id" />
+                <input type="hidden" name="Image" value="@Model.Image" />
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <img id="previewImage" src="~/img/@Model.Image" class="card-img-top" alt="..." style="width:100%">
+                            </div>
+                            <div class="form-group">
+                                <input type="file" id="imageInput" name="file" value="@Model.Image" accept="image/*" onchange="updateCard()" />
+                                <span asp-validation-for="Image" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <label asp-for="Name"></label>
+                                <input asp-for="Name" class="form-control" />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Title"></label>
+                                <input asp-for="Title" class="form-control" />
+                                <span asp-validation-for="Title" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="TwitterURL"></label>
+                                <input asp-for="TwitterURL" class="form-control" />
+                                <span asp-validation-for="TwitterURL" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="FacebookURL"></label>
+                                <input asp-for="FacebookURL" class="form-control" />
+                                <span asp-validation-for="FacebookURL" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="LinkedinURL"></label>
+                                <input asp-for="LinkedinURL" class="form-control" />
+                                <span asp-validation-for="LinkedinURL" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="InstagramURL"></label>
+                                <input asp-for="InstagramURL" class="form-control" />
+                                <span asp-validation-for="InstagramURL" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="YoutubeURL"></label>
+                                <input asp-for="YoutubeURL" class="form-control" />
+                                <span asp-validation-for="YoutubeURL" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer text-center">
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i>Güncelle</button>
+                </div>
+            </form>
+        </div>
+        <!-- /.card -->
+    </div>
+</div>
+
+<script>
+    function updateCard() {
+        var input = document.getElementById('imageInput');
+        var preview = document.getElementById('previewImage');
+        var file = input.files[0];
+        var reader = new FileReader();
+        reader.onloadend = function () {
+            preview.src = reader.result;
+        }
+        if (file) {
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = "";
+        }
+    }
+</script>

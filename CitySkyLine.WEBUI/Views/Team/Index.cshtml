@@ -1,0 +1,63 @@
+﻿@model List<ResultTeamDTO>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Team Listesi</h3>
+                <div class="card-tools">
+                    <div class="input-group input-group-sm">
+                        <a href="/Team/Create" class="btn btn-outline-primary btn-sm">
+                            <i class="fas fa-plus"></i> Yeni Team
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Title</th>
+                            <th>Twitter</th>
+                            <th>Facebook</th>
+                            <th>LinkedIn</th>
+                            <th>Instagram</th>
+                            <th>Youtube</th>
+                            <th>Güncelle</th>
+                            <th>Sil</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var team in Model)
+                        {
+                            <tr>
+                                <td>@team.Id</td>
+                                <td><img class="img-fluid" src="~/img/@team.Image" alt="Image" style="width:50%"></td>
+                                <td>@team.Name</td>
+                                <td>@team.Title</td>
+                                <td>@team.TwitterURL</td>
+                                <td>@team.FacebookURL</td>
+                                <td>@team.LinkedinURL</td>
+                                <td>@team.InstagramURL</td>
+                                <td>@team.YoutubeURL</td>
+                                <td><a href="/Team/Edit?id=@team.Id" class="btn btn-outline-warning">Güncelle</a></td>
+                                <td><a asp-controller="Team" asp-action="Delete" asp-route-id="@team.Id" class="btn btn-outline-danger">Sil</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+</div>
+

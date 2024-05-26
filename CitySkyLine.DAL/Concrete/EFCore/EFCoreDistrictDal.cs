@@ -23,5 +23,21 @@ namespace CitySkyLine.DAL.Concrete.EFCore
                     : districts.ToList();
             }
         }
+
+        public District GetById(int id)
+        {
+            using (var context = new DataContext())
+            {
+                return context.Districts.Where(i => i.CityId == id).FirstOrDefault();
+            }
+        }
+
+        public List<District> GetDistrictsById(int id)
+        {
+            using (var context = new DataContext())
+            {
+                return context.Districts.Where(i => i.CityId == id).ToList();
+            }
+        }
     }
 }

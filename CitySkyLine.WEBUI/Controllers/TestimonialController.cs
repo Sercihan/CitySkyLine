@@ -42,23 +42,23 @@ namespace CitySkyLine.WEBUI.Controllers
 
                 var testimonial = _testimonialService.GetOne(i => i.Name == dto.Name);
 
-                //if (testimonial != null)
-                //{
-                //    ErrorViewModel error = new ErrorViewModel()
-                //    {
-                //        Code = 101,
-                //        Title = "Kayıt Hatası",
-                //        Description = "Aynı isimde kayıtlı bir Testimonial vardır. Lütfen farklı isim girişi yapınız.",
-                //        ReturnUrl = "/Testimonial/Index",
-                //        Css = "text-warning"
-                //    };
-                //    return View("Error", error);
-                //}
-                //if (file == null)
-                //{
-                //    ModelState.AddModelError("", "Resim için dosya yüklenmedi.");
-                //    return View(dto);
-                //}
+                if (testimonial != null)
+                {
+                    ErrorViewModel error = new ErrorViewModel()
+                    {
+                        Code = 101,
+                        Title = "Kayıt Hatası",
+                        Description = "Aynı isimde kayıtlı bir Testimonial vardır. Lütfen farklı isim girişi yapınız.",
+                        ReturnUrl = "/Testimonial/Index",
+                        Css = "text-warning"
+                    };
+                    return View("Error", error);
+                }
+                if (file == null)
+                {
+                    ModelState.AddModelError("", "Resim için dosya yüklenmedi.");
+                    return View(dto);
+                }
 
                 dto.Image = await ImageMethods.UploadImage(file);
                 _testimonialService.Create(_mapper.Map<Testimonial>(dto));
@@ -106,6 +106,7 @@ namespace CitySkyLine.WEBUI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(UpdateTestimonialDTO dto, IFormFile file)
         {
+            ModelState.Remove("file");
             ModelState.Remove("Image");
             if (ModelState.IsValid)
             {

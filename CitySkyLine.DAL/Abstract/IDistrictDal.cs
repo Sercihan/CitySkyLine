@@ -11,5 +11,6 @@ namespace CitySkyLine.DAL.Abstract
     public interface IDistrictDal : IRepository<District>
     {
         List<District> GetAll(Expression<Func<District, bool>> filter);
+        public List<District> GetDistrictsById(int id);
     }
 }

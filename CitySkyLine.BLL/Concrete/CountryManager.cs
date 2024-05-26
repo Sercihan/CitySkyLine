@@ -48,5 +48,10 @@ namespace CitySkyLine.BLL.Concrete
         {
             _countryDal.Update(entity);
         }
+
+        public List<City> GetCityById(int id)
+        {
+            return _countryDal.GetCityById(id);
+        }
     }
 }

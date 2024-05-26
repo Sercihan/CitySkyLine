@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 
 namespace CitySkyLine.DAL.Abstract
 {
-    public interface ICityDal:IRepository<City>
+    public interface ICityDal : IRepository<City>
     {
+        public List<District> GetDistrictsById(int id);
+        public List<City> GetCitiesById(int id);
     }
 }
