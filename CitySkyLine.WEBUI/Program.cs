@@ -66,6 +66,9 @@ namespace CitySkyLine.WEBUI
             builder.Services.AddScoped<IMailService, MailManager>();
             builder.Services.AddScoped<IMailDal, EFCoreMailDal>();
 
+            builder.Services.AddScoped<IStatisticService, StatisticManager>();
+            builder.Services.AddScoped<IStatisticDal, EFCoreStatisticDal>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

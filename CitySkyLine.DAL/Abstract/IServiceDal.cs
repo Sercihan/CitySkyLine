@@ -10,6 +10,5 @@ namespace CitySkyLine.DAL.Abstract
 {
     public interface IServiceDal:IRepository<Service>
     {
-        List<Service> GetAll(Expression<Func<Service, bool>> filter);
     }
 }

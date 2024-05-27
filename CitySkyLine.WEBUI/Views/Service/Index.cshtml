@@ -41,7 +41,7 @@
                                 <td>@service.Icon</td>
                                 <td style="text-wrap: wrap;">@service.Description</td>
                                 <td><a href="/Service/Edit?id=@service.Id" class="btn btn-outline-warning">Güncelle</a></td>
-                                <td><a asp-controller="Team" asp-action="Delete" asp-route-id="@service.Id" class="btn btn-outline-danger">Sil</a></td>
+                                <td><a asp-controller="Service" asp-action="Delete" asp-route-id="@service.Id" class="btn btn-outline-danger">Sil</a></td>
                             </tr>
                         }
                     </tbody>
