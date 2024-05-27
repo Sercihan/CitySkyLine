@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using CitySkyLine.BLL.Abstract;
+﻿using CitySkyLine.BLL.Abstract;
 using CitySkyLine.DAL.Concrete.EFCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,14 +10,12 @@ namespace CitySkyLine.WEBUI.Controllers
         private readonly ICountryService _countryService;
         private readonly ICityService _cityService;
         private readonly IDistrictService _districtService;
-        private readonly IMapper _mapper;
 
-        public LocationController(ICountryService countryService, ICityService cityService, IDistrictService districtService, IMapper mapper)
+        public LocationController(ICountryService countryService, ICityService cityService, IDistrictService districtService)
         {
             _countryService = countryService;
             _cityService = cityService;
             _districtService = districtService;
-            _mapper = mapper;
         }
         //public IActionResult GetDistricts(int cityId)
         //{
@@ -26,24 +23,33 @@ namespace CitySkyLine.WEBUI.Controllers
         //    return Json(districts);
         //}
 
-        [HttpGet("getCountries")]
+        [HttpPost("postCountries")]
         public IActionResult GetCountries()
         {
+            ViewBag.Districts = _districtService.GetAll();
+            ViewBag.Cities = _cityService.GetAll();
+            ViewBag.Countries = _countryService.GetAll();
             var countries = _countryService.GetAll();
             return Json(countries);
         }
 
-        [HttpGet("getCities")]
+        [HttpPost("postCities")]
         public IActionResult GetCities(int countryId)
         {
-            var cities = _cityService.GetCitiesById(countryId);
+            ViewBag.Districts = _districtService.GetAll();
+            ViewBag.Cities = _cityService.GetAll();
+            ViewBag.Countries = _countryService.GetAll();
+            var cities = _cityService.GetAll(i => i.CountryId == countryId);
             return Json(cities);
         }
 
-        [HttpGet("getDistricts")]
+        [HttpPost("postDistricts")]
         public IActionResult GetDistricts(int cityId)
         {
-            var districts = _districtService.GetDistrictsById(cityId);
+            ViewBag.Districts = _districtService.GetAll();
+            ViewBag.Cities = _cityService.GetAll();
+            ViewBag.Countries = _countryService.GetAll();
+            var districts = _districtService.GetAll(i => i.CityId == cityId);
             return Json(districts);
         }
     }
