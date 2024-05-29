@@ -17,7 +17,7 @@ namespace CitySkyLine.WEBUI.Controllers
         private readonly ICountryService _countryService;
         private readonly IMapper _mapper;
 
-        public ProjectController(IProjectService projectService, IDistrictService districtService,ICityService cityService, ICountryService countryService ,IMapper mapper)
+        public ProjectController(IProjectService projectService, IDistrictService districtService, ICityService cityService, ICountryService countryService, IMapper mapper)
         {
             _projectService = projectService;
             _districtService = districtService;
@@ -35,8 +35,6 @@ namespace CitySkyLine.WEBUI.Controllers
         }
         public IActionResult Create()
         {
-            ViewBag.Districts = _districtService.GetAll();
-            ViewBag.Cities = _cityService.GetAll();
             ViewBag.Countries = _countryService.GetAll();
             return View(new CreateProjectDTO());
         }
@@ -61,19 +59,22 @@ namespace CitySkyLine.WEBUI.Controllers
                         ReturnUrl = "/Project/Index",
                         Css = "text-warning"
                     };
+                    ViewBag.Countries = _countryService.GetAll();
                     return View("Error", error);
                 }
                 if (file == null)
                 {
                     ModelState.AddModelError("", "Resim için dosya yüklenmedi.");
+                    ViewBag.Countries = _countryService.GetAll();
                     return View(dto);
                 }
 
                 dto.Image = await ImageMethods.UploadImage(file);
                 _projectService.Create(_mapper.Map<Project>(dto));
-
+                ViewBag.Countries = _countryService.GetAll();
                 return RedirectToAction("Index");
             }
+            ViewBag.Countries = _countryService.GetAll();
             return View(dto);
         }
 

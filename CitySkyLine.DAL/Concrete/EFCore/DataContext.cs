@@ -15,22 +15,6 @@ namespace CitySkyLine.DAL.Concrete.EFCore
             optionsBuilder.UseSqlServer("Server=JUDGMENTDAY; Database=CitySkyLine; Integrated Security=True; TrustServerCertificate=True;");
         }
 
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    modelBuilder.Entity<ProjectCity>()
-        //  .HasKey(pc => new { pc.ProjectId, pc.CityId });
-
-        //    modelBuilder.Entity<ProjectCity>()
-        //        .HasOne(p => p.Project)
-        //        .WithMany(pc => pc.ProjectCities)
-        //        .HasForeignKey(p => p.ProjectId);
-
-        //    modelBuilder.Entity<ProjectCity>()
-        //        .HasOne(p => p.City)
-        //        .WithMany(pc => pc.ProjectCities)
-        //        .HasForeignKey(p => p.CityId);
-        //}
-
         public DbSet<Ability> Abilities { get; set; }
         public DbSet<About> Abouts { get; set; }
         public DbSet<Blog> Blogs { get; set; }

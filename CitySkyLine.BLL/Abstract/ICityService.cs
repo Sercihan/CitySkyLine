@@ -9,7 +9,9 @@ namespace CitySkyLine.BLL.Abstract
 {
     public interface ICityService : IRepositoryService<City>
     {
-        public List<District> GetDistrictsById(int id);
-        public List<City> GetCitiesById(int id);
+        List<District> GetDistrictsById(int id);
+        List<City> GetCitiesById(int id);
+
+        List<City> GetByCountryId(int id);
     }
 }

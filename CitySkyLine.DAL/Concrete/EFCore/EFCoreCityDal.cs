@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CitySkyLine.DAL.Concrete.EFCore
 {
-    public class EFCoreCityDal : EFCoreGenericRepository<City, DataContext> , ICityDal
+    public class EFCoreCityDal : EFCoreGenericRepository<City, DataContext>, ICityDal
     {
         public List<District> GetDistrictsById(int id)
         {
@@ -36,6 +36,14 @@ namespace CitySkyLine.DAL.Concrete.EFCore
         }
 
         public List<City> GetCitiesById(int id)
+        {
+            using (var context = new DataContext())
+            {
+                return context.Cities.Where(i => i.CountryId == id).ToList();
+            }
+        }
+
+        public List<City> GetByCountryId(int id)
         {
             using (var context = new DataContext())
             {

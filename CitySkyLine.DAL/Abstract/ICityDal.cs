@@ -9,7 +9,8 @@ namespace CitySkyLine.DAL.Abstract
 {
     public interface ICityDal : IRepository<City>
     {
-        public List<District> GetDistrictsById(int id);
-        public List<City> GetCitiesById(int id);
+        List<District> GetDistrictsById(int id);
+        List<City> GetCitiesById(int id);
+        List<City> GetByCountryId(int id);
     }
 }

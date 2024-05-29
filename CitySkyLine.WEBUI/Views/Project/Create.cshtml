@@ -16,14 +16,17 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-3">
+
                             <div class="form-group">
                                 <img id="previewImage" src="" class="card-img-top" alt="..." style="width:100%">
                             </div>
+
                             <div class="form-group">
                                 <input type="file" id="imageInput" name="file" value="@Model.Image" accept="image/*" onchange="updateCard()" />
                                 <span asp-validation-for="Image" class="text-danger"></span>
                             </div>
                         </div>
+
                         <div class="col-md-9">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <div class="form-group">
@@ -31,62 +34,51 @@
                                 <input asp-for="Title" class="form-control" />
                                 <span asp-validation-for="Title" class="text-danger"></span>
                             </div>
+
                             <div class="form-group">
                                 <label asp-for="Type"></label>
                                 <input asp-for="Type" class="form-control" />
                                 <span asp-validation-for="Type" class="text-danger"></span>
                             </div>
+
                             <div class="form-group">
-                                <label asp-for="CountryId"></label>
-                                <select class="form-control" style="width: 100%;" asp-for="CountryId" id="CountryId">
+                                <label>Ülke</label>
+                                <select class="form-control select2" style="width: 100%;" asp-for="CountryId">
                                     <option value="">-- Ülke Seçiniz --</option>
+                                    @foreach (var item in ViewBag.Countries)
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    }
                                 </select>
                             </div>
+
                             <div class="form-group">
-                                <label asp-for="CityId"></label>
-                                <select class="form-control" style="width: 100%;" asp-for="CityId" id="CityId">
-                                    <option value="">-- İl Seçiniz --</option>
+                                <label>Şehir</label>
+                                <select class="form-control select2" style="width: 100%;" asp-for="CityId">
                                 </select>
                             </div>
+
                             <div class="form-group">
-                                <label asp-for="DistrictId"></label>
-                                <select class="form-control" style="width: 100%;" asp-for="DistrictId" id="DistrictId">
-                                    <option value="">-- İlçe Seçiniz --</option>
+                                <label>İlçe</label>
+                                <select class="form-control select2" style="width: 100%;" asp-for="DistrictId">
                                 </select>
                             </div>
+
                         </div>
                     </div>
                 </div>
                 <!-- /.card-body -->
-
                 <div class="card-footer text-center">
                     <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Kaydet</button>
                 </div>
-
             </div>
             <!-- /.card -->
         </div>
-
     </div>
 </form>
 
 <script>
     $(document).ready(function () {
-        // Ülke verilerini doldur
-        $.ajax({
-            url: '/postCountries',
-            method: 'POST',
-            success: function (data) {
-                data.forEach(function (country) {
-                    $('#CountryId').append(new Option(country.name, country.id));
-                });
-            },
-            error: function (xhr, status, error) {
-                console.error("Ülke verileri yüklenemedi:", status, error);
-                console.log("Response Text:", xhr.responseText);
-                alert('Ülke verileri yüklenemedi.');
-            }
-        });
 
         // İl verilerini doldur
         $('#CountryId').change(function () {
@@ -95,12 +87,15 @@
             $('#DistrictId').empty().append(new Option("-- İlçe Seçiniz --", "")); // İlçe alanını da temizle
             if (countryId) {
                 $.ajax({
-                    url: '/postCities',
-                    method: 'POST',
+                    url: '/Location/GetCities',
+                    method: 'Get',
                     data: { countryId: countryId },
                     success: function (data) {
-                        data.forEach(function (city) {
-                            $('#CityId').append(new Option(city.name, city.id));
+                        // İlleri seçim kutusuna ekleme
+                        var cities = $('#CityId');
+                        $.each(data, function (index, city) {
+                            cities.append($('<option></option>').val(city.id).text(city.name));
+
                         });
                     },
                     error: function (xhr, status, error) {
@@ -115,15 +110,20 @@
         // İlçe verilerini doldur
         $('#CityId').change(function () {
             var cityId = $(this).val();
-            $('#DistrictId').empty().append(new Option("-- İlçe Seçiniz --", ""));
+
+            $('#DistrictId').empty().append(new Option("-- İlçe Seçiniz --", "")); // İlçe alanını da temizle
             if (cityId) {
                 $.ajax({
-                    url: '/postDistricts',
-                    method: 'POST',
+                    url: '/Location/GetDistricts',
+                    method: 'Get',
                     data: { cityId: cityId },
                     success: function (data) {
-                        data.forEach(function (district) {
-                            $('#DistrictId').append(new Option(district.name, district.id));
+                        // İlçeleri seçim kutusuna ekleme
+                        var districts = $('#DistrictId');
+                        districts.empty(); // Önceki ilçeleri temizle
+
+                        $.each(data, function (index, district) {
+                            districts.append($('<option></option>').val(district.id).text(district.name));
                         });
                     },
                     error: function (xhr, status, error) {

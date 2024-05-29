@@ -18,15 +18,6 @@ namespace CitySkyLine.BLL.DTOs.BlogDTO
         public string UserName { get; set; }
         public DateTime DateTime { get; set; }
 
-        public int CategoryId { get; set; }
-        public Category Category { get; set; }
-
-        public List<BlogDetail> BlogDetails { get; set; }
-        public List<RecentPost> RecentPosts { get; set; }
-        public List<Comment> Comments { get; set; }
-
-
-
         [StringLength(600)]
         public string Description1 { get; set; }
         [StringLength(600)]
@@ -34,6 +25,7 @@ namespace CitySkyLine.BLL.DTOs.BlogDTO
         [StringLength(600)]
         public string? Description3 { get; set; }
 
-        public int BlogId { get; set; }
+
+        public int CategoryId { get; set; }
     }
 }

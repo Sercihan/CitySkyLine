@@ -57,5 +57,10 @@ namespace CitySkyLine.BLL.Concrete
         {
             return _cityDal.GetCitiesById(id);
         }
+
+        public List<City> GetByCountryId(int id)
+        {
+            return _cityDal.GetByCountryId(id);
+        }
     }
 }

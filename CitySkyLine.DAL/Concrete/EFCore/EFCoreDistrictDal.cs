@@ -39,5 +39,13 @@ namespace CitySkyLine.DAL.Concrete.EFCore
                 return context.Districts.Where(i => i.CityId == id).ToList();
             }
         }
+
+        public List<District> GetByCityId(int id)
+        {
+            using (var context = new DataContext())
+            {
+                return context.Districts.Where(i => i.CityId == id).ToList();
+            }
+        }
     }
 }

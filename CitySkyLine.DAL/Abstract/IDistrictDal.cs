@@ -12,5 +12,7 @@ namespace CitySkyLine.DAL.Abstract
     {
         List<District> GetAll(Expression<Func<District, bool>> filter);
         public List<District> GetDistrictsById(int id);
+
+        List<District> GetByCityId(int id);
     }
 }

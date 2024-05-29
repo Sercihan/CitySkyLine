@@ -14,13 +14,15 @@ namespace CitySkyLine.WEBUI.Controllers
         private readonly IBlogService _blogService;
         private readonly IRecentPostService _recentPostService;
         private readonly IBlogDetailService _blogDetailService;
+        private readonly ICategoryService _categoryService;
         private readonly IMapper _mapper;
 
-        public BlogController(IBlogService blogService, IRecentPostService recentPostService, IBlogDetailService blogDetailService, IMapper mapper)
+        public BlogController(IBlogService blogService, IRecentPostService recentPostService, IBlogDetailService blogDetailService, IMapper mapper, ICategoryService categoryService)
         {
             _blogService = blogService;
             _recentPostService = recentPostService;
             _blogDetailService = blogDetailService;
+            _categoryService = categoryService;
             _mapper = mapper;
         }
         public IActionResult Index()
@@ -34,7 +36,7 @@ namespace CitySkyLine.WEBUI.Controllers
         public IActionResult Create()
         {
             ViewBag.RecentPost = _recentPostService.GetAll();
-            ViewBag.BlogDetail = _blogDetailService.GetAll();
+            ViewBag.Categories = _categoryService.GetAll();
             return View(new CreateBlogDTO());
         }
 
@@ -71,8 +73,10 @@ namespace CitySkyLine.WEBUI.Controllers
                 }
 
                 dto.Image = await ImageMethods.UploadImage(file);
+                dto.DateTime = DateTime.Now;
                 _blogService.Create(_mapper.Map<Blog>(dto));
-
+                ViewBag.RecentPost = _recentPostService.GetAll();
+                ViewBag.Categories = _categoryService.GetAll();
                 return RedirectToAction("Index");
             }
             ViewBag.RecentPost = _recentPostService.GetAll();

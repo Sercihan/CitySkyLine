@@ -53,5 +53,10 @@ namespace CitySkyLine.BLL.Concrete
         {
             return _districtDal.GetDistrictsById(id);
         }
+
+        public List<District> GetByCityId(int id)
+        {
+            return _districtDal.GetByCityId(id);
+        }
     }
 }
