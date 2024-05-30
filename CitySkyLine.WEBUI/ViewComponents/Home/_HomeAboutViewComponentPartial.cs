@@ -1,9 +1,6 @@
 ﻿using AutoMapper;
 using CitySkyLine.BLL.Abstract;
 using CitySkyLine.BLL.DTOs.AboutDTO;
-using CitySkyLine.BLL.DTOs.ServiceDTO;
-using CitySkyLine.DAL.Concrete.EFCore;
-using CitySkyLine.Entity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CitySkyLine.WEBUI.ViewComponents.Home

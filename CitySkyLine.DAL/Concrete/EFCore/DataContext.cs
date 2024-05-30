@@ -18,7 +18,6 @@ namespace CitySkyLine.DAL.Concrete.EFCore
         public DbSet<Ability> Abilities { get; set; }
         public DbSet<About> Abouts { get; set; }
         public DbSet<Blog> Blogs { get; set; }
-        public DbSet<BlogDetail> BlogDetails { get; set; }
         public DbSet<Carousel> Carousels { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<City> Cities { get; set; }
@@ -26,7 +25,6 @@ namespace CitySkyLine.DAL.Concrete.EFCore
         public DbSet<Country> Countries { get; set; }
         public DbSet<District> Districts { get; set; }
         public DbSet<Project> Projects { get; set; }
-        public DbSet<RecentPost> RecentPosts { get; set; }
         public DbSet<Service> Services { get; set; }
         public DbSet<Team> Teams { get; set; }
         public DbSet<Testimonial> Testimonials { get; set; }

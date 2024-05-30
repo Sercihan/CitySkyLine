@@ -1,4 +1,4 @@
-    using CitySkyLine.BLL.Abstract;
+using CitySkyLine.BLL.Abstract;
 using CitySkyLine.BLL.Concrete;
 using CitySkyLine.DAL.Abstract;
 using CitySkyLine.DAL.Concrete.EFCore;
@@ -50,9 +50,6 @@ namespace CitySkyLine.WEBUI
 
             builder.Services.AddScoped<IProjectService, ProjectManager>();
             builder.Services.AddScoped<IProjectDal, EFCoreProjectDal>();
-
-            builder.Services.AddScoped<IRecentPostService, RecentPostManager>();
-            builder.Services.AddScoped<IRecentPostDal, EFCoreRecentPostDal>();
 
             builder.Services.AddScoped<IServiceService, ServiceManager>();
             builder.Services.AddScoped<IServiceDal, EFCoreServiceDal>();

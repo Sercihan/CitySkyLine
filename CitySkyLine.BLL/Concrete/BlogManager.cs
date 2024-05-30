@@ -46,5 +46,10 @@ namespace CitySkyLine.BLL.Concrete
         {
             _blogDal.Update(entity);
         }
+
+        public List<Blog> Last6Blog()
+        {
+            return _blogDal.Last6Blog();
+        }
     }
 }

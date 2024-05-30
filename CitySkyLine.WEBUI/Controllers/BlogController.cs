@@ -12,15 +12,13 @@ namespace CitySkyLine.WEBUI.Controllers
     public class BlogController : Controller
     {
         private readonly IBlogService _blogService;
-        private readonly IRecentPostService _recentPostService;
         private readonly IBlogDetailService _blogDetailService;
         private readonly ICategoryService _categoryService;
         private readonly IMapper _mapper;
 
-        public BlogController(IBlogService blogService, IRecentPostService recentPostService, IBlogDetailService blogDetailService, IMapper mapper, ICategoryService categoryService)
+        public BlogController(IBlogService blogService, IBlogDetailService blogDetailService, IMapper mapper, ICategoryService categoryService)
         {
             _blogService = blogService;
-            _recentPostService = recentPostService;
             _blogDetailService = blogDetailService;
             _categoryService = categoryService;
             _mapper = mapper;
@@ -35,7 +33,6 @@ namespace CitySkyLine.WEBUI.Controllers
         }
         public IActionResult Create()
         {
-            ViewBag.RecentPost = _recentPostService.GetAll();
             ViewBag.Categories = _categoryService.GetAll();
             return View(new CreateBlogDTO());
         }
@@ -52,7 +49,6 @@ namespace CitySkyLine.WEBUI.Controllers
 
                 if (blog != null)
                 {
-                    ViewBag.RecentPost = _recentPostService.GetAll();
                     ViewBag.BlogDetail = _blogDetailService.GetAll();
                     ErrorViewModel error = new ErrorViewModel()
                     {
@@ -66,7 +62,6 @@ namespace CitySkyLine.WEBUI.Controllers
                 }
                 if (file == null)
                 {
-                    ViewBag.RecentPost = _recentPostService.GetAll();
                     ViewBag.BlogDetail = _blogDetailService.GetAll();
                     ModelState.AddModelError("", "Resim için dosya yüklenmedi.");
                     return View(dto);
@@ -75,11 +70,9 @@ namespace CitySkyLine.WEBUI.Controllers
                 dto.Image = await ImageMethods.UploadImage(file);
                 dto.DateTime = DateTime.Now;
                 _blogService.Create(_mapper.Map<Blog>(dto));
-                ViewBag.RecentPost = _recentPostService.GetAll();
                 ViewBag.Categories = _categoryService.GetAll();
                 return RedirectToAction("Index");
             }
-            ViewBag.RecentPost = _recentPostService.GetAll();
             ViewBag.BlogDetail = _blogDetailService.GetAll();
             return View(dto);
         }
@@ -150,7 +143,6 @@ namespace CitySkyLine.WEBUI.Controllers
                 _blogService.Update(_mapper.Map<Blog>(dto));
                 return RedirectToAction("Index");
             }
-            ViewBag.RecentPost = _recentPostService.GetAll();
             ViewBag.BlogDetail = _blogDetailService.GetAll();
             return View(dto);
         }

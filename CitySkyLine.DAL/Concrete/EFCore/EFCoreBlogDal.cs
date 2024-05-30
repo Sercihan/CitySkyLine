@@ -23,5 +23,13 @@ namespace CitySkyLine.DAL.Concrete.EFCore
                     : blogs.ToList();
             }
         }
+        
+        public List<Blog> Last6Blog()
+        {
+            using (var context = new DataContext())
+            {
+                return context.Blogs.OrderByDescending(i => i.DateTime).Take(6).ToList();
+            }
+        }
     }
 }

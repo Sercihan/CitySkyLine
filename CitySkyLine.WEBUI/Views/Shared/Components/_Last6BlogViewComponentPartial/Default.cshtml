@@ -1,4 +1,4 @@
-﻿@model List<ResultRecentPostDTO>
+﻿@model List<ResultBlogDTO>
 
 <div class="mb-5">
     <h3 class="text-uppercase mb-4">SON GÖNDERİLER</h3>
@@ -6,9 +6,9 @@
         @foreach (var item in Model)
         {
             <div class="d-flex mb-3">
-                <img class="img-fluid" src="~/img/@item.Blog.Image" style="width: 100px; height: 100px; object-fit: cover;" alt="">
+                <img class="img-fluid" src="~/img/@item.Image" style="width: 100px; height: 100px; object-fit: cover;" alt="">
                 <a href="" class="h6 d-flex align-items-center bg-white text-uppercase px-3 mb-0">
-                    @item.Blog.Title
+                    @item.Title
                 </a>
             </div>
         }

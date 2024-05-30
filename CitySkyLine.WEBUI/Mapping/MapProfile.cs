@@ -28,10 +28,6 @@ namespace CitySkyLine.WEBUI.Mapping
             CreateMap<Mail, ResultMailDTO>().ReverseMap();
             CreateMap<Mail, UpdateMailDTO>().ReverseMap();
 
-            CreateMap<RecentPost, ResultRecentPostDTO>().ReverseMap();
-            CreateMap<RecentPost, UpdateRecentPostDTO>().ReverseMap();
-            CreateMap<RecentPost, CreateRecentPostDTO>().ReverseMap();
-
             CreateMap<Blog, ResultBlogDTO>().ReverseMap();
             CreateMap<Blog, UpdateBlogDTO>().ReverseMap();
             CreateMap<Blog, CreateBlogDTO>().ReverseMap();

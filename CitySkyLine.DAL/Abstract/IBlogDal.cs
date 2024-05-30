@@ -11,5 +11,6 @@ namespace CitySkyLine.DAL.Abstract
     public interface IBlogDal : IRepository<Blog>
     {
         List<Blog> GetAll(Expression<Func<Blog, bool>> filter);
+        List<Blog> Last6Blog();
     }
 }

@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using CitySkyLine.BLL.Abstract;
 using CitySkyLine.BLL.DTOs.CommentDTO;
-using CitySkyLine.BLL.DTOs.RecentPostDTO;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CitySkyLine.WEBUI.ViewComponents.Home

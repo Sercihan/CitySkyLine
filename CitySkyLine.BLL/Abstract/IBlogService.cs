@@ -9,5 +9,6 @@ namespace CitySkyLine.BLL.Abstract
 {
     public interface IBlogService : IRepositoryService<Blog>
     {
+        List<Blog> Last6Blog();
     }
 }
