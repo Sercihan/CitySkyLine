@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using CitySkyLine.BLL.Abstract;
-using CitySkyLine.BLL.DTOs.ProjectDTO;
 using CitySkyLine.BLL;
 using CitySkyLine.WEBUI.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -12,14 +11,12 @@ namespace CitySkyLine.WEBUI.Controllers
     public class BlogController : Controller
     {
         private readonly IBlogService _blogService;
-        private readonly IBlogDetailService _blogDetailService;
         private readonly ICategoryService _categoryService;
         private readonly IMapper _mapper;
 
-        public BlogController(IBlogService blogService, IBlogDetailService blogDetailService, IMapper mapper, ICategoryService categoryService)
+        public BlogController(IBlogService blogService, IMapper mapper, ICategoryService categoryService)
         {
             _blogService = blogService;
-            _blogDetailService = blogDetailService;
             _categoryService = categoryService;
             _mapper = mapper;
         }
@@ -49,12 +46,11 @@ namespace CitySkyLine.WEBUI.Controllers
 
                 if (blog != null)
                 {
-                    ViewBag.BlogDetail = _blogDetailService.GetAll();
                     ErrorViewModel error = new ErrorViewModel()
                     {
                         Code = 101,
                         Title = "Kayıt Hatası",
-                        Description = "Aynı isimde kayıtlı bir Blog vardır. Lütfen farklı isim girişi yapınız.",
+                        Description = "Aynı isimde kayıtlı bir blog vardır. Lütfen farklı isim girişi yapınız.",
                         ReturnUrl = "/Blog/Index",
                         Css = "text-warning"
                     };
@@ -62,7 +58,6 @@ namespace CitySkyLine.WEBUI.Controllers
                 }
                 if (file == null)
                 {
-                    ViewBag.BlogDetail = _blogDetailService.GetAll();
                     ModelState.AddModelError("", "Resim için dosya yüklenmedi.");
                     return View(dto);
                 }
@@ -73,7 +68,6 @@ namespace CitySkyLine.WEBUI.Controllers
                 ViewBag.Categories = _categoryService.GetAll();
                 return RedirectToAction("Index");
             }
-            ViewBag.BlogDetail = _blogDetailService.GetAll();
             return View(dto);
         }
 
@@ -143,7 +137,6 @@ namespace CitySkyLine.WEBUI.Controllers
                 _blogService.Update(_mapper.Map<Blog>(dto));
                 return RedirectToAction("Index");
             }
-            ViewBag.BlogDetail = _blogDetailService.GetAll();
             return View(dto);
         }
 

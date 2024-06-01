@@ -27,9 +27,13 @@ namespace CitySkyLine.WEBUI.Controllers
         {
             return View();
         }
-        public IActionResult BlogDetail()
+        public IActionResult BlogDetail(int id)
         {
-            return View();
+            return View(id);
+        }
+        public IActionResult BlogByCategory(int id)
+        {
+            return View(id);
         }
         public IActionResult Contact()
         {

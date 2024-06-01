@@ -70,6 +70,23 @@ namespace CitySkyLine.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Mails",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
+                    Subject = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    Message = table.Column<string>(type: "nvarchar(900)", maxLength: 900, nullable: false),
+                    Read = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Mails", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Services",
                 columns: table => new
                 {
@@ -151,6 +168,9 @@ namespace CitySkyLine.DAL.Migrations
                     Image = table.Column<string>(type: "nvarchar(600)", maxLength: 600, nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     DateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Description1 = table.Column<string>(type: "nvarchar(600)", maxLength: 600, nullable: false),
+                    Description2 = table.Column<string>(type: "nvarchar(600)", maxLength: 600, nullable: true),
+                    Description3 = table.Column<string>(type: "nvarchar(600)", maxLength: 600, nullable: true),
                     CategoryId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -185,28 +205,6 @@ namespace CitySkyLine.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BlogDetails",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Description1 = table.Column<string>(type: "nvarchar(600)", maxLength: 600, nullable: false),
-                    Description2 = table.Column<string>(type: "nvarchar(600)", maxLength: 600, nullable: true),
-                    Description3 = table.Column<string>(type: "nvarchar(600)", maxLength: 600, nullable: true),
-                    BlogId = table.Column<int>(type: "int", maxLength: 200, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_BlogDetails", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_BlogDetails_Blogs_BlogId",
-                        column: x => x.BlogId,
-                        principalTable: "Blogs",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Comments",
                 columns: table => new
                 {
@@ -223,25 +221,6 @@ namespace CitySkyLine.DAL.Migrations
                     table.PrimaryKey("PK_Comments", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Comments_Blogs_BlogId",
-                        column: x => x.BlogId,
-                        principalTable: "Blogs",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "RecentPosts",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    BlogId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RecentPosts", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_RecentPosts_Blogs_BlogId",
                         column: x => x.BlogId,
                         principalTable: "Blogs",
                         principalColumn: "Id",
@@ -296,11 +275,6 @@ namespace CitySkyLine.DAL.Migrations
                 column: "AboutId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BlogDetails_BlogId",
-                table: "BlogDetails",
-                column: "BlogId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Blogs_CategoryId",
                 table: "Blogs",
                 column: "CategoryId");
@@ -324,11 +298,6 @@ namespace CitySkyLine.DAL.Migrations
                 name: "IX_Projects_DistrictId",
                 table: "Projects",
                 column: "DistrictId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_RecentPosts_BlogId",
-                table: "RecentPosts",
-                column: "BlogId");
         }
 
         /// <inheritdoc />
@@ -338,19 +307,16 @@ namespace CitySkyLine.DAL.Migrations
                 name: "Abilities");
 
             migrationBuilder.DropTable(
-                name: "BlogDetails");
-
-            migrationBuilder.DropTable(
                 name: "Carousels");
 
             migrationBuilder.DropTable(
                 name: "Comments");
 
             migrationBuilder.DropTable(
-                name: "Projects");
+                name: "Mails");
 
             migrationBuilder.DropTable(
-                name: "RecentPosts");
+                name: "Projects");
 
             migrationBuilder.DropTable(
                 name: "Services");
@@ -365,16 +331,16 @@ namespace CitySkyLine.DAL.Migrations
                 name: "Abouts");
 
             migrationBuilder.DropTable(
-                name: "Districts");
-
-            migrationBuilder.DropTable(
                 name: "Blogs");
 
             migrationBuilder.DropTable(
-                name: "Cities");
+                name: "Districts");
 
             migrationBuilder.DropTable(
                 name: "Categories");
+
+            migrationBuilder.DropTable(
+                name: "Cities");
 
             migrationBuilder.DropTable(
                 name: "Countries");

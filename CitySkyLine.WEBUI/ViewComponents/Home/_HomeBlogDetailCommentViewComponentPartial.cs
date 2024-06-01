@@ -16,9 +16,9 @@ namespace CitySkyLine.WEBUI.ViewComponents.Home
             _mapper = mapper;
         }
 
-        public IViewComponentResult Invoke()
+        public IViewComponentResult Invoke(int id)
         {
-            return View(_mapper.Map<List<ResultCommentDTO>>(_commentService.GetAll()));
+            return View(_mapper.Map<List<ResultCommentDTO>>(_commentService.GetBlogCommentsById(id)));
         }
     }
 }

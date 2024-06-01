@@ -1,7 +1,7 @@
-﻿
+﻿@model Int32
 @{
     ViewData["Title"] = "BlogDetail";
 }
 
-@await Component.InvokeAsync("_HomeBlogDetailViewComponentPartial")
+@await Component.InvokeAsync("_HomeBlogDetailViewComponentPartial", Model)
 

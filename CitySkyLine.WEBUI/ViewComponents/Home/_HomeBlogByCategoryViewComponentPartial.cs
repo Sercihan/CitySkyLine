@@ -5,12 +5,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CitySkyLine.WEBUI.ViewComponents.Home
 {
-    public class _HomeBlogDetailStartViewComponentPartial : ViewComponent
+    public class _HomeBlogByCategoryViewComponentPartial : ViewComponent
     {
         private readonly IBlogService _blogService;
         private readonly IMapper _mapper;
 
-        public _HomeBlogDetailStartViewComponentPartial(IBlogService blogService, IMapper mapper)
+        public _HomeBlogByCategoryViewComponentPartial(IBlogService blogService, IMapper mapper)
         {
             _blogService = blogService;
             _mapper = mapper;
@@ -18,8 +18,8 @@ namespace CitySkyLine.WEBUI.ViewComponents.Home
 
         public IViewComponentResult Invoke(int id)
         {
-            var blog = _blogService.GetById(id);
-            var model = _mapper.Map<ResultBlogDTO>(blog);
+            var blog = _blogService.GetBlogByCategoryId(id);
+            var model = _mapper.Map<List<ResultBlogDTO>>(blog);
             return View(model);
         }
     }

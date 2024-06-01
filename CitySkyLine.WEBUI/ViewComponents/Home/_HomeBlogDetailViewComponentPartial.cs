@@ -1,28 +1,25 @@
 ﻿using AutoMapper;
 using CitySkyLine.BLL.Abstract;
-using CitySkyLine.BLL.DTOs.BlogDetailDTO;
-using CitySkyLine.BLL.DTOs.ServiceDTO;
-using CitySkyLine.DAL.Concrete.EFCore;
-using CitySkyLine.Entity;
+using CitySkyLine.BLL.DTOs.BlogDTO;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CitySkyLine.WEBUI.ViewComponents.Home
 {
     public class _HomeBlogDetailViewComponentPartial : ViewComponent
     {
-        private readonly IBlogDetailService _blogDetailService;
+        private readonly IBlogService _blogService;
         private readonly IMapper _mapper;
 
-        public _HomeBlogDetailViewComponentPartial(IBlogDetailService blogDetailService, IMapper mapper)
+        public _HomeBlogDetailViewComponentPartial(IBlogService blogService, IMapper mapper)
         {
-            _blogDetailService = blogDetailService;
+            _blogService = blogService;
             _mapper = mapper;
         }
 
-        public IViewComponentResult Invoke()
+        public IViewComponentResult Invoke(int id)
         {
-            var blogDetail = _blogDetailService.GetBlogDetailsById(1);
-            var model = _mapper.Map<ResultBlogDetailDTO>(blogDetail);
+            var blog = _blogService.GetById(id);
+            var model = _mapper.Map<ResultBlogDTO>(blog);
             return View(model);
         }
     }

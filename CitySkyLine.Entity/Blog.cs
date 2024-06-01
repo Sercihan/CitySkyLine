@@ -28,7 +28,6 @@ namespace CitySkyLine.Entity
         public int CategoryId { get; set; }
         public Category Category { get; set; }
 
-        public List<RecentPost> RecentPosts { get; set; }
         public List<Comment> Comments { get; set; }
     }
 }

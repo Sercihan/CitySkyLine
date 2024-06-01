@@ -12,5 +12,6 @@ namespace CitySkyLine.DAL.Abstract
     {
         List<Blog> GetAll(Expression<Func<Blog, bool>> filter);
         List<Blog> Last6Blog();
+        List<Blog> GetBlogByCategoryId(int id);
     }
 }

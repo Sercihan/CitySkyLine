@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CitySkyLine.DAL.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240529082643_updatedatabase")]
-    partial class updatedatabase
+    [Migration("20240601093539_CreateDataBase")]
+    partial class CreateDataBase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -133,38 +133,6 @@ namespace CitySkyLine.DAL.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Blogs");
-                });
-
-            modelBuilder.Entity("CitySkyLine.Entity.BlogDetail", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("BlogId")
-                        .HasMaxLength(200)
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description1")
-                        .IsRequired()
-                        .HasMaxLength(600)
-                        .HasColumnType("nvarchar(600)");
-
-                    b.Property<string>("Description2")
-                        .HasMaxLength(600)
-                        .HasColumnType("nvarchar(600)");
-
-                    b.Property<string>("Description3")
-                        .HasMaxLength(600)
-                        .HasColumnType("nvarchar(600)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BlogId");
-
-                    b.ToTable("BlogDetails");
                 });
 
             modelBuilder.Entity("CitySkyLine.Entity.Carousel", b =>
@@ -382,24 +350,6 @@ namespace CitySkyLine.DAL.Migrations
                     b.ToTable("Projects");
                 });
 
-            modelBuilder.Entity("CitySkyLine.Entity.RecentPost", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("BlogId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BlogId");
-
-                    b.ToTable("RecentPosts");
-                });
-
             modelBuilder.Entity("CitySkyLine.Entity.Service", b =>
                 {
                     b.Property<int>("Id")
@@ -541,17 +491,6 @@ namespace CitySkyLine.DAL.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("CitySkyLine.Entity.BlogDetail", b =>
-                {
-                    b.HasOne("CitySkyLine.Entity.Blog", "Blog")
-                        .WithMany()
-                        .HasForeignKey("BlogId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Blog");
-                });
-
             modelBuilder.Entity("CitySkyLine.Entity.City", b =>
                 {
                     b.HasOne("CitySkyLine.Entity.Country", "Country")
@@ -596,17 +535,6 @@ namespace CitySkyLine.DAL.Migrations
                     b.Navigation("District");
                 });
 
-            modelBuilder.Entity("CitySkyLine.Entity.RecentPost", b =>
-                {
-                    b.HasOne("CitySkyLine.Entity.Blog", "Blog")
-                        .WithMany("RecentPosts")
-                        .HasForeignKey("BlogId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Blog");
-                });
-
             modelBuilder.Entity("CitySkyLine.Entity.About", b =>
                 {
                     b.Navigation("Abilities");
@@ -615,8 +543,6 @@ namespace CitySkyLine.DAL.Migrations
             modelBuilder.Entity("CitySkyLine.Entity.Blog", b =>
                 {
                     b.Navigation("Comments");
-
-                    b.Navigation("RecentPosts");
                 });
 
             modelBuilder.Entity("CitySkyLine.Entity.Category", b =>

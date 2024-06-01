@@ -27,9 +27,6 @@ namespace CitySkyLine.WEBUI
             builder.Services.AddScoped<IBlogService, BlogManager>();
             builder.Services.AddScoped<IBlogDal, EFCoreBlogDal>();
 
-            builder.Services.AddScoped<IBlogDetailService, BlogDetailManager>();
-            builder.Services.AddScoped<IBlogDetailDal, EFCoreBlogDetailDal>();
-
             builder.Services.AddScoped<ICarouselService, CarouselManager>();
             builder.Services.AddScoped<ICarouselDal, EFCoreCarouselDal>();
 

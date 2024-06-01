@@ -51,5 +51,10 @@ namespace CitySkyLine.BLL.Concrete
         {
             return _blogDal.Last6Blog();
         }
+
+        public List<Blog> GetBlogByCategoryId(int id)
+        {
+            return _blogDal.GetBlogByCategoryId(id);
+        }
     }
 }

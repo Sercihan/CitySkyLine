@@ -23,5 +23,13 @@ namespace CitySkyLine.DAL.Concrete.EFCore
                     : comments.ToList();
             }
         }
+
+        public List<Comment> GetBlogCommentsById(int id)
+        {
+            using (var context = new DataContext())
+            {
+                return context.Comments.Include(i => i.Blog).Where(i => i.BlogId == id).ToList();
+            }
+        }
     }
 }

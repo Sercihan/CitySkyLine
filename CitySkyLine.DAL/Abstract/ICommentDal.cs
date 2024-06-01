@@ -9,6 +9,6 @@ namespace CitySkyLine.DAL.Abstract
 {
     public interface ICommentDal:IRepository<Comment>
     {
-        
+        List<Comment> GetBlogCommentsById(int id);
     }
 }

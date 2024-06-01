@@ -23,9 +23,12 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Image</th>
+                            <th style="width:480px">Image</th>
                             <th>Title</th>
                             <th>User Name</th>
+                            <th style="width:360px">1.Paragraf</th>
+                            <th style="width:360px">2.Paragraf</th>
+                            <th style="width:360px">3.Paragraf</th>
                             <th>Date Time</th>
                             <th>Güncelle</th>
                             <th>Sil</th>
@@ -36,9 +39,12 @@
                         {
                             <tr>
                                 <td>@blog.Id</td>
-                                <td><img class="img-fluid" src="~/img/@blog.Image" alt="Image" style="width:50%"></td>
-                                <td>@blog.Title</td>
+                                <td><img class="img-fluid large-image" src="~/img/@blog.Image" alt="Image" style="width:100%"></td>
+                                <td style="text-wrap: wrap;">@blog.Title</td>
                                 <td>@blog.UserName</td>
+                                <td style="text-wrap: wrap;">@blog.Description1</td>
+                                <td style="text-wrap: wrap;">@blog.Description2</td>
+                                <td style="text-wrap: wrap;">@blog.Description3</td>
                                 <td>@blog.DateTime.ToString("dd/MM/yyyy")</td>
                                 <td><a href="/Blog/Edit?id=@blog.Id" class="btn btn-outline-warning">Güncelle</a></td>
                                 <td><a asp-controller="Blog" asp-action="Delete" asp-route-id="@blog.Id" class="btn btn-outline-danger">Sil</a></td>

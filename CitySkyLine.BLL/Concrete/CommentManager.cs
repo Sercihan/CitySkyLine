@@ -34,6 +34,11 @@ namespace CitySkyLine.BLL.Concrete
             return _commentDal.GetAll(filter);
         }
 
+        public List<Comment> GetBlogCommentsById(int id)
+        {
+            return _commentDal.GetBlogCommentsById(id);
+        }
+
         public Comment GetById(int id)
         {
             return _commentDal.GetById(id);

@@ -4,9 +4,7 @@
     <div class="d-flex flex-column justify-content-start bg-light p-4">
         @foreach(var item in Model)
         {
-            <a class="h6 text-uppercase mb-4" href="#"><i class="fa fa-angle-right me-2"></i>@item.Title</a>
+            <a class="h6 text-uppercase mb-4" href="/Home/BlogByCategory/@item.Id"><i class="fa fa-angle-right me-2"></i>@item.Title</a>
         }
-       
-        
     </div>
 </div>

@@ -269,3 +269,7 @@
     background: var(--primary);
     transform: skew(40deg);
 }
+
+.large-image {
+    width: 480px;
+}

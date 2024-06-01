@@ -9,5 +9,6 @@ namespace CitySkyLine.BLL.Abstract
 {
     public interface ICommentService : IRepositoryService<Comment>
     {
+        List<Comment> GetBlogCommentsById(int id);
     }
 }

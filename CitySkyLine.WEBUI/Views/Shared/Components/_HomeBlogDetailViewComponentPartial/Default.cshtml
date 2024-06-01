@@ -1,4 +1,4 @@
-﻿@model ResultBlogDetailDTO
+﻿@model ResultBlogDTO
 <!-- Page Header Start -->
 <div class="container-fluid page-header">
     <h1 class="display-3 text-uppercase text-white mb-3">BLOG DETAYLARI</h1>
@@ -14,10 +14,10 @@
     <div class="row g-5">
         <div class="col-lg-8">
             <!-- Blog Detail Start -->
-            @await Component.InvokeAsync("_HomeBlogDetailStartViewComponentPartial")
+            @await Component.InvokeAsync("_HomeBlogDetailStartViewComponentPartial", Model.Id)
             <!-- Blog Detail End -->
             <!-- Comment List Start -->
-            @await Component.InvokeAsync("_HomeBlogDetailCommentViewComponentPartial")
+            @await Component.InvokeAsync("_HomeBlogDetailCommentViewComponentPartial", Model.Id)
             <!-- Comment List End -->
             <!-- Comment Form Start -->
             <div class="bg-light p-5">

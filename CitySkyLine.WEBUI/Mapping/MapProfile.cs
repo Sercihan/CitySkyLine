@@ -1,14 +1,12 @@
 ﻿using AutoMapper;
 using CitySkyLine.BLL.DTOs.AbilityDTO;
 using CitySkyLine.BLL.DTOs.AboutDTO;
-using CitySkyLine.BLL.DTOs.BlogDetailDTO;
 using CitySkyLine.BLL.DTOs.BlogDTO;
 using CitySkyLine.BLL.DTOs.CarouselDTO;
 using CitySkyLine.BLL.DTOs.CategoryDTO;
 using CitySkyLine.BLL.DTOs.CommentDTO;
 using CitySkyLine.BLL.DTOs.MailDTO;
 using CitySkyLine.BLL.DTOs.ProjectDTO;
-using CitySkyLine.BLL.DTOs.RecentPostDTO;
 using CitySkyLine.BLL.DTOs.ServiceDTO;
 using CitySkyLine.BLL.DTOs.TeamDTO;
 using CitySkyLine.BLL.DTOs.TestimonialDTO;
@@ -31,10 +29,6 @@ namespace CitySkyLine.WEBUI.Mapping
             CreateMap<Blog, ResultBlogDTO>().ReverseMap();
             CreateMap<Blog, UpdateBlogDTO>().ReverseMap();
             CreateMap<Blog, CreateBlogDTO>().ReverseMap();
-
-            CreateMap<BlogDetail, ResultBlogDetailDTO>().ReverseMap();
-            CreateMap<BlogDetail, UpdateBlogDetailDTO>().ReverseMap();
-            CreateMap<BlogDetail, CreateBlogDetailDTO>().ReverseMap();
 
             CreateMap<Carousel, ResultCarouselDTO>().ReverseMap();
             CreateMap<Carousel, UpdateCarouselDTO>().ReverseMap();

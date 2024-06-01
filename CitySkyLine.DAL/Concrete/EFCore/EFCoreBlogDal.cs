@@ -1,12 +1,8 @@
 ﻿using CitySkyLine.DAL.Abstract;
 using CitySkyLine.Entity;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace CitySkyLine.DAL.Concrete.EFCore
 {
@@ -23,7 +19,15 @@ namespace CitySkyLine.DAL.Concrete.EFCore
                     : blogs.ToList();
             }
         }
-        
+
+        public List<Blog> GetBlogByCategoryId(int id)
+        {
+            using (var context = new DataContext())
+            {
+                return context.Blogs.Include(i => i.Category).Where(i => i.CategoryId == id).ToList();
+            }
+        }
+
         public List<Blog> Last6Blog()
         {
             using (var context = new DataContext())
