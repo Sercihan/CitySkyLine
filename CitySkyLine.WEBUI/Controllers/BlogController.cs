@@ -5,6 +5,7 @@ using CitySkyLine.WEBUI.Models;
 using Microsoft.AspNetCore.Mvc;
 using CitySkyLine.BLL.DTOs.BlogDTO;
 using CitySkyLine.Entity;
+using CitySkyLine.BLL.DTOs.MailDTO;
 
 namespace CitySkyLine.WEBUI.Controllers
 {
@@ -22,10 +23,10 @@ namespace CitySkyLine.WEBUI.Controllers
         }
         public IActionResult Index()
         {
+            
             var blogs = _blogService.GetAll();
-
             var model = _mapper.Map<List<ResultBlogDTO>>(blogs);
-
+            ViewBag.Categories = _categoryService.GetAll();
             return View(model);
         }
         public IActionResult Create()
@@ -68,6 +69,7 @@ namespace CitySkyLine.WEBUI.Controllers
                 ViewBag.Categories = _categoryService.GetAll();
                 return RedirectToAction("Index");
             }
+            ViewBag.Categories = _categoryService.GetAll();
             return View(dto);
         }
 
@@ -101,7 +103,7 @@ namespace CitySkyLine.WEBUI.Controllers
                 return View("Error", error);
             }
             var model = _mapper.Map<UpdateBlogDTO>(blog);
-
+            ViewBag.Categories = _categoryService.GetAll();
             return View(model);
         }
 
@@ -133,10 +135,11 @@ namespace CitySkyLine.WEBUI.Controllers
                     ImageMethods.DeleteImage(blog.Image);
                     dto.Image = await ImageMethods.UploadImage(file);
                 }
-
+                dto.DateTime = DateTime.Now;
                 _blogService.Update(_mapper.Map<Blog>(dto));
                 return RedirectToAction("Index");
             }
+            ViewBag.Categories = _categoryService.GetAll();
             return View(dto);
         }
 
