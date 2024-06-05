@@ -26,7 +26,7 @@
                             <th style="width:480px">Image</th>
                             <th>Title</th>
                             <th>User Name</th>
-                            <th>Category Title</th>
+                            <th>Category</th>
                             <th style="width:360px">1.Paragraf</th>
                             <th style="width:360px">2.Paragraf</th>
                             <th style="width:360px">3.Paragraf</th>
@@ -43,7 +43,7 @@
                                 <td><img class="img-fluid large-image" src="~/img/@blog.Image" alt="Image" style="width:100%"></td>
                                 <td style="text-wrap: wrap;">@blog.Title</td>
                                 <td>@blog.UserName</td>
-                                <td>@blog.CategoryId</td>
+                                <td style="text-wrap: wrap;">@blog.Category.Title</td>
                                 <td style="text-wrap: wrap;">@blog.Description1</td>
                                 <td style="text-wrap: wrap;">@blog.Description2</td>
                                 <td style="text-wrap: wrap;">@blog.Description3</td>

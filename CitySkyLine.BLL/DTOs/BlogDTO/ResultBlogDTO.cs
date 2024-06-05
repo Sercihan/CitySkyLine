@@ -28,6 +28,7 @@ namespace CitySkyLine.BLL.DTOs.BlogDTO
 
 
         public int CategoryId { get; set; }
+        public Category Category { get; set; }
         public List<Comment> Comments { get; set; }
     }
 }

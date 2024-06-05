@@ -12,7 +12,7 @@ namespace CitySkyLine.DAL.Concrete.EFCore
         {
             using (var context = new DataContext())
             {
-                var blogs = context.Blogs.AsQueryable();
+                var blogs = context.Blogs.Include(i => i.Category).AsQueryable();
 
                 return filter != null
                     ? blogs.Where(filter).ToList()
