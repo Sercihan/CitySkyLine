@@ -1,0 +1,23 @@
+﻿@model ResultCommentDTO
+
+<div class="bg-light p-5">
+    <h3 class="text-uppercase mb-4">BİR YORUM YAZ</h3>
+    <form asp-controller="Comment" asp-action="Create" method="post" enctype="multipart/form-data">
+        <input type="hidden" asp-for="BlogId" />
+        <div class="row g-3">
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="form-control" placeholder="Kullanıcı Adı" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description"></label>
+                <textarea asp-for="Description" class="form-control" placeholder="Yorumunuz.."></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group text-center">
+                <button class="btn btn-primary" type="submit">GÖNDER</button>
+            </div>
+        </div>
+    </form>
+</div>

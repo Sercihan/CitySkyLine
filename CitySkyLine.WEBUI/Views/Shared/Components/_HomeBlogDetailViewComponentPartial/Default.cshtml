@@ -20,25 +20,7 @@
             @await Component.InvokeAsync("_HomeBlogDetailCommentViewComponentPartial", Model.Id)
             <!-- Comment List End -->
             <!-- Comment Form Start -->
-            <div class="bg-light p-5">
-                <h3 class="text-uppercase mb-4">BİR YORUM YAZ</h3>
-                <form>
-                    <div class="row g-3">
-                        <div class="col-12 col-sm-6">
-                            <input type="text" class="form-control bg-white border-0" placeholder="Adınız" style="height: 55px;">
-                        </div>
-                        <div class="col-12 col-sm-6">
-                            <input type="email" class="form-control bg-white border-0" placeholder="Emailiniz" style="height: 55px;">
-                        </div>
-                        <div class="col-12">
-                            <textarea class="form-control bg-white border-0" rows="5" placeholder="Yorumunuz"></textarea>
-                        </div>
-                        <div class="col-12">
-                            <button class="btn btn-primary w-100 py-3" type="submit">GÖNDER</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
+            @await Component.InvokeAsync("_HomeBlogDetailCommentFormViewComponentPartial", Model.Id)
             <!-- Comment Form End -->
         </div>
 
