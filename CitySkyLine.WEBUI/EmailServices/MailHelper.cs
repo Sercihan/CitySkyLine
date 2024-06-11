@@ -18,7 +18,7 @@ namespace CitySkyLine.WEBUI.EmailServices
             {
                 var message = new MailMessage();
 
-                message.From = new MailAddress("test.altanemre1989@gmail.com");
+                message.From = new MailAddress("sercihan19@gmail.com");
 
                 to.ForEach(x =>
                 {
@@ -34,7 +34,7 @@ namespace CitySkyLine.WEBUI.EmailServices
                     smtp.Host = "smtp.gmail.com";
                     smtp.Port = 587;
                     smtp.EnableSsl = true;
-                    smtp.Credentials = new NetworkCredential("test.altanemre1989@gmail.com", "vdxs vbbe rhtp mwed");
+                    smtp.Credentials = new NetworkCredential("sercihan19@gmail.com", "ijef xnpr ehob lasr");
 
                     smtp.Send(message);
 
