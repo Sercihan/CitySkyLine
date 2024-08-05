@@ -58,7 +58,7 @@ namespace CitySkyLine.WEBUI.Controllers
         public IActionResult SendEmail(Mail mail)
         {
             string body = $"<h1>Ýletiþim Bilgileri</h1><br>Ad Soyad:{mail.Name}<br>Email:{mail.Email}<br>Konu:{mail.Subject}<br>Mesaj:{mail.Message}";
-            bool result = MailHelper.SendMail(body, "altanemre1989@gmail.com", mail.Subject);
+            bool result = MailHelper.SendMail(body, "sercihan19@gmail.com", mail.Subject);
             if (result)
             {
                 mail.Read = false;

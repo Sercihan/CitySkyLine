@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Identity;
 using CitySkyLine.BLL.Abstract;
 using CitySkyLine.BLL.Concrete;
 using CitySkyLine.DAL.Abstract;
 using CitySkyLine.DAL.Concrete.EFCore;
 using CitySkyLine.WEBUI.Mapping;
 using Microsoft.EntityFrameworkCore;
+using CitySkyLine.WEBUI.Identity;
 
 namespace CitySkyLine.WEBUI
 {
@@ -16,7 +18,43 @@ namespace CitySkyLine.WEBUI
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddAutoMapper(typeof(MapProfile));
-            
+
+            builder.Services.AddDbContext<ApplicationIdentityDbContext>(options =>
+           options.UseSqlServer(builder.Configuration.GetConnectionString("IdentityConnection")));
+
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationIdentityDbContext>()
+    .AddDefaultTokenProviders();
+
+            builder.Services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireDigit = true;
+                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequiredLength = 6;
+                options.Password.RequireUppercase = true;
+                options.Password.RequireLowercase = true;
+            });
+
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Account/Login";
+                options.LogoutPath = "/Account/Logout";
+                options.AccessDeniedPath = "/Account/AccessDenied";
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+                options.SlidingExpiration = true;
+                options.Cookie = new CookieBuilder
+                {
+                    HttpOnly = true,
+                    Name = ".CitySkyLine.Security.Cookie",
+                    SameSite = SameSiteMode.Strict
+                };
+            });
+
+            var userManager = builder.Services.BuildServiceProvider().GetService<UserManager<ApplicationUser>>();
+            var roleManager = builder.Services.BuildServiceProvider().GetService<RoleManager<IdentityRole>>();
+
+
+
 
             builder.Services.AddScoped<IAbilityService, AbilityManager>();
             builder.Services.AddScoped<IAbilityDal, EFCoreAbilityDal>();
@@ -75,14 +113,16 @@ namespace CitySkyLine.WEBUI
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseAuthentication();
             app.UseRouting();
 
             app.UseAuthorization();
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Admin}/{action=Index}/{id?}");
+                pattern: "{controller=Home}/{action=Index}/{id?}");
+
+            SeedIdentity.Seed(userManager, roleManager, app.Configuration).Wait();
 
             app.Run();
         }
